@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{ community.name }}</h1>
+    <p>{{ community.description }}</p>
+    <p>Создатель: {{ community.creator.username }}</p>
+    <p>Участников: {{ community.members.count }}</p>
+    <p>Теги: {{ community.tags|default:"Нет" }}</p>
+
+    {% if user.is_authenticated and user not in community.members.all %}
+        <form method="post" action="{% url 'communities:join' community.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Вступить</button>
+        </form>
+    {% else %}
+        <p><span class="badge bg-success">Вы участник</span></p>
+    {% endif %}
+
+    <hr>
+    <h3>Посты</h3>
+    <a href="{% url 'posts:create' %}?community={{ community.pk }}" class="btn btn-sm btn-outline-primary">Создать пост</a>
+    <ul class="list-group mt-2">
+        {% for post in posts %}
+            <li class="list-group-item">
+                <a href="{% url 'posts:detail' post.pk %}">{{ post.title }}</a>
+                <small class="text-muted">от {{ post.author.username }} ({{ post.created_at|date:"d.m.Y H:i" }})</small>
+                <span class="badge bg-secondary">{{ post.likes.count }} лайков</span>
+            </li>
+        {% empty %}
+            <li class="list-group-item">В этом сообществе пока нет постов.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

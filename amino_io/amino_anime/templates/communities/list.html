@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Все сообщества</h1>
+    <a href="{% url 'communities:create' %}" class="btn btn-success mb-3">+ Создать сообщество</a>
+    <div class="row">
+        {% for community in communities %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ community.name }}</h5>
+                        <p class="card-text">{{ community.description|truncatechars:50 }}</p>
+                        <a href="{% url 'communities:detail' community.pk %}" class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Сообществ пока нет. Создайте первое!</p>
+        {% endfor %}
+    </div>
+{% endblock %}
