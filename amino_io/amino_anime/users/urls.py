@@ -4,6 +4,6 @@ from . import views
 app_name = 'users'
 
 urlpatterns = [
+    path('edit/', views.profile_edit, name='edit_profile'),
     path('<str:username>/', views.profile_view, name='profile'),
-    # позже можно добавить редактирование профиля: path('edit/', views.profile_edit, name='edit'),
 ]

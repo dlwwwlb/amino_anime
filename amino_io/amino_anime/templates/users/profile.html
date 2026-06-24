@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <h2 class="mb-2">Профиль {{ profile_user.username }}</h2>
+                        <p class="text-muted mb-0">{{ profile.bio|default:'Пользователь ещё не написал о себе.' }}</p>
+                    </div>
+                    {% if user.is_authenticated and user == profile_user %}
+                        <a href="{% url 'users:edit_profile' %}" class="btn btn-outline-secondary btn-sm">Редактировать</a>
+                    {% endif %}
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col-md-3 text-center mb-3 mb-md-0">
+                        {% if profile.avatar %}
+                            <img src="{{ profile.avatar.url }}" alt="Avatar" class="img-fluid rounded-circle" style="max-width: 140px;">
+                        {% else %}
+                            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 140px; height: 140px; margin: 0 auto;">
+                                <span class="text-muted">No avatar</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-9">
+                        <p><strong>Имя пользователя:</strong> {{ profile_user.username }}</p>
+                        <p><strong>Email:</strong> {{ profile_user.email|default:'Не указан' }}</p>
+                        <p><strong>Любимый аниме:</strong> {{ profile.favorite_anime|default:'Не указано' }}</p>
+                        <p><strong>Дата регистрации:</strong> {{ profile_user.date_joined|date:'d.m.Y H:i' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

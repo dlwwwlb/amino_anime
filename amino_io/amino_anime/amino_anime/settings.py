@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'communities',
     'posts',
     'comments',
+    'plant_agent',
 
     # crispy
     'crispy_forms',
@@ -147,12 +148,13 @@ SITE_ID = 1
 #ACCOUNT_EMAIL_REQUIRED = True
 #ACCOUNT_USERNAME_REQUIRED = True
 #ACCOUNT_AUTHENTICATION_METHOD = 'username_email'  # можно войти по username или email
-ACCOUNT_EMAIL_VERIFICATION = 'optional'  # можно 'mandatory' для подтверждения почты
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 LOGIN_REDIRECT_URL = '/communities/'  # после входа
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'     # после выхода
 LOGIN_URL = '/accounts/login/'
 ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.CustomSignupForm'
 # Настройки crispy
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'

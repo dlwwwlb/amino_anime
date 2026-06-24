@@ -27,4 +27,5 @@ urlpatterns = [
     path('communities/', include('communities.urls')),
     path('users/', include('users.urls')),      # ← добавьте
     path('posts/', include('posts.urls')),  
+    path('plants/', include('plant_agent.urls')),
 ]

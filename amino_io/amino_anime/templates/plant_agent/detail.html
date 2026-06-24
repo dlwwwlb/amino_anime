@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ plant.name }}</h2>
+<p><strong>Species:</strong> {{ plant.species|default:'Unknown species' }}</p>
+<p><strong>Water every:</strong> {{ plant.water_every_days }} days</p>
+<p><strong>Last watered:</strong> {{ plant.last_watered|default:'Not recorded' }}</p>
+<p><strong>Notes:</strong> {{ plant.notes|default:'No notes' }}</p>
+<a href="{% url 'plant_agent:list' %}" class="btn btn-outline-secondary">Back to plants</a>
+{% endblock %}

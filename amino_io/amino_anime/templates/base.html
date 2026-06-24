@@ -24,7 +24,7 @@
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile' user.username %}">Профиль</a>
+                            <a class="nav-link" href="{% url 'users:profile' user.username %}">Профиль</a>
                         </li>
                         <li class="nav-item">
                             <form method="post" action="{% url 'account_logout' %}" style="display: inline;">

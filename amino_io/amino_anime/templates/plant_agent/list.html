@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your plants</h2>
+<a href="{% url 'plant_agent:create' %}" class="btn btn-primary">Add plant</a>
+<ul class="list-group mt-3">
+  {% for plant in plants %}
+  <li class="list-group-item">
+    <a href="{% url 'plant_agent:detail' plant.pk %}">{{ plant.name }}</a>
+    <span class="text-muted">— {{ plant.species|default:'Unknown species' }}</span>
+  </li>
+  {% empty %}
+  <li class="list-group-item">No plants yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
